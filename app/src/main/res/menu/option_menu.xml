@@ -20,5 +20,8 @@
         android:id="@+id/chart"
         android:title="BMI Chart"/>
 
+    <item android:id="@+id/rating"
+        android:title="Rating US"/>
+
 
 </menu>

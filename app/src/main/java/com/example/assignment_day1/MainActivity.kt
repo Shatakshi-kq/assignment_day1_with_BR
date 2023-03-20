@@ -1,16 +1,19 @@
 package com.example.assignment_day1
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.assignment_day1.databinding.RatingBarBinding
 import java.text.DecimalFormat
 
 
@@ -176,6 +179,25 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
             }
 
+            R.id.rating -> {
+
+                val rating = RatingBarBinding.inflate(layoutInflater)
+                val dialog = Dialog(this)
+                dialog.setContentView(rating.root)
+                dialog.setCancelable(false)
+                val windowManager = WindowManager.LayoutParams()
+                windowManager.width = WindowManager.LayoutParams.MATCH_PARENT
+                windowManager.height = WindowManager.LayoutParams.WRAP_CONTENT
+                dialog.window?.attributes = windowManager
+                dialog.show()
+
+                rating.button.setOnClickListener {
+
+                    dialog.dismiss()
+                }
+
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -200,7 +222,7 @@ class MainActivity : AppCompatActivity() {
         val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)
         alertDialog.show()
-        
+
 
     }
 
