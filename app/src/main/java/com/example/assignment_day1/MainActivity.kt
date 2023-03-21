@@ -13,75 +13,75 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.assignment_day1.databinding.ActivityMainBinding
 import com.example.assignment_day1.databinding.RatingBarBinding
 import java.text.DecimalFormat
 
 
 class MainActivity : AppCompatActivity() {
     val TAG: String = "MainActivity"
+
+lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         Log.d(TAG, "onCreate")
 
         var isclear: Boolean = false
 
-        var weight = findViewById<EditText>(R.id.w_input)
-        var height = findViewById<EditText>(R.id.h_input)
-        val c_button = findViewById<Button>(R.id.btnn_click)
-        val result = findViewById<TextView>(R.id.result)
-        val value = findViewById<TextView>(R.id.te2_input)
+        var weight = binding.wContainer.editText.toString()
+        var height = binding.hContainer.editText.toString()
 
-
-
-
-        c_button.setOnClickListener() {
-            if (weight.text.toString().isEmpty() && height.text.toString().isEmpty()) {
+        binding.btnnClick.setOnClickListener() {
+            if (weight.isEmpty() && height.isEmpty()) {
                 Toast.makeText(this, "please fill both value", Toast.LENGTH_SHORT).show()
             }
 
-            if (height.text.toString().isEmpty() && weight.text.toString().isNotEmpty()) {
+            if (height.isEmpty() && weight.isNotEmpty()) {
                 Toast.makeText(this, "please fill the height", Toast.LENGTH_SHORT).show()
-                height.requestFocus()
+                binding.hContainer.requestFocus()
             }
 
-            if (weight.text.toString().isEmpty() && height.text.toString().isNotEmpty()) {
+            if (weight.isEmpty() && height.isNotEmpty()) {
                 Toast.makeText(this, "please fill the weight", Toast.LENGTH_SHORT).show()
-                weight.requestFocus()
+               binding.wContainer.requestFocus()
             }
-            if (weight.text.toString().isNotEmpty() && height.text.toString().isNotEmpty()) {
+            if (weight.isNotEmpty() && height.isNotEmpty()) {
 
             }
 
             if (isclear) {
                 isclear = false
-                weight.text.clear()
-                weight.isEnabled = true
-                height.isEnabled = true
+                binding.wContainer.editText!!.text.clear()
 
-                height.text.clear()
-                value.setText("")
-                result.setText("")
-                c_button.setText("Calculate")
+                binding.wContainer.isEnabled = true
+                binding.hContainer.isEnabled = true
+
+                binding.hContainer.editText!!.text.clear()
+                binding.te2Input.setText("")
+                binding.result.setText("")
+               binding.btnnClick.setText("Calculate")
                 Toast.makeText(this, "Clear All", Toast.LENGTH_SHORT).show()
 
             } else {
 
-                if (height.text.toString().isNotEmpty() && weight.text.toString().isNotEmpty()) {
-                    weight.isEnabled = false
-                    height.isEnabled = false
-                    weight.requestFocus()
+                if (height.isNotEmpty() && weight.isNotEmpty()) {
+                   binding.wContainer.isEnabled = false
+                       binding.hContainer.isEnabled = false
+                    binding.wContainer.requestFocus()
 
                     if (!isclear) {
                         isclear = true
                         var msg2: String = "BMI Value:"
-                        c_button.setText("Clear")
+                        binding.btnnClick.setText("Clear")
                         Toast.makeText(this, "Calculate Bmi", Toast.LENGTH_SHORT).show()
-                        val hF = height.text.toString().toDouble()
-                        val wF = weight.text.toString().toDouble()
+                        val hF = height.toDouble()
+                        val wF = weight.toDouble()
                         val hi = hF / 100
                         val bmi = wF / (hi * hi)
-                        result.text = ((bmi * 100) / 100.0).toString()
+                        binding.result.text = ((bmi * 100) / 100.0).toString()
 
                         // var bmi: Float = (wF / ((hF / 100) * (hF / 100)))5
                         var msg: String = "";
@@ -97,8 +97,8 @@ class MainActivity : AppCompatActivity() {
                             msg = "You Are Normal"
                         }
                         val df = DecimalFormat("#.##")
-                        value.setText(msg);
-                        result.setText("Your BMI Value : " + df.format(bmi).toString())
+                        binding.te2Input.setText(msg);
+                        binding.result.setText("Your BMI Value : " + df.format(bmi).toString())
 
 
                     }
