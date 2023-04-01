@@ -4,6 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="myviewmodel"
+            type="com.example.assignment_day1.ViewModel.BmiViewModel" >
+        </variable>
+    </data>
+
 
 
 
@@ -38,7 +45,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/w_Container"
+            android:id="@+id/w_Container_layout"
             android:layout_marginHorizontal="20dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +63,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/weight"
                 android:maxLength="4"
+                android:text="@={myviewmodel.baseObservable.height}"
                 android:hint="Enter Your Weight(in Kg)"
                 android:inputType = "numberDecimal"
                 android:lines="1"/>
@@ -65,14 +74,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/h_container"
             app:helperText="Required"
             app:helperTextTextColor="@color/design_default_color_error"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             app:counterMaxLength="4"
+            android:id="@+id/h_container_layout"
             app:counterEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/w_Container"
+            app:layout_constraintTop_toBottomOf="@id/w_Container_layout"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="20dp"
             app:boxCornerRadiusBottomEnd="20dp"
@@ -83,7 +92,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:id="@+id/height"
                 android:maxLength="5"
                 android:hint="Enter Your Height(in cm)"
                 android:lines="1"
@@ -105,7 +114,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/h_container"/>
+            app:layout_constraintTop_toBottomOf="@id/h_container_layout"/>
 
 
 
